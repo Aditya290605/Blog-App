@@ -1,3 +1,4 @@
+import 'package:blog_app/core/theme/app_colors.dart';
 import 'package:blog_app/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:blog_app/features/auth/presentation/widgets/custom_button.dart';
 import 'package:blog_app/features/auth/presentation/widgets/custom_textfeild.dart';
@@ -20,7 +21,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(backgroundColor: AppPallete.backgroundColor),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Form(
