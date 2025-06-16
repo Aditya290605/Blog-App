@@ -15,6 +15,8 @@ abstract interface class AuthRemoteDataSource {
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
+  final SupabaseClient supabaseClient;
+  AuthRemoteDataSourceImpl({required this.supabaseClient});
   @override
   Future<String> signUpWithEmailAndPassword({
     required String name,
@@ -23,7 +25,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }) async {
     String res = '';
     try {
-      final response = await Supabase.instance.client.auth.signUp(
+      final response = await supabaseClient.auth.signUp(
         email: email,
         password: password,
         data: {'name': name},

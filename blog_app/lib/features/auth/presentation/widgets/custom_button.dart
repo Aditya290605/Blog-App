@@ -8,22 +8,25 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-      height: 55,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-          colors: [AppPallete.gradient1, AppPallete.gradient2],
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        height: 55,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [AppPallete.gradient1, AppPallete.gradient2],
+          ),
+          borderRadius: BorderRadius.circular(10.0),
         ),
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: Text(
-        text!,
-        textAlign: TextAlign.center,
-        style: TextStyle(color: Colors.white, fontSize: 20),
+        child: Text(
+          text!,
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Colors.white, fontSize: 20),
+        ),
       ),
     );
   }

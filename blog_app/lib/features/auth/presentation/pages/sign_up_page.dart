@@ -1,8 +1,11 @@
 import 'package:blog_app/core/theme/app_colors.dart';
+import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:blog_app/features/auth/presentation/bloc/auth_event.dart';
 import 'package:blog_app/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:blog_app/features/auth/presentation/widgets/custom_button.dart';
 import 'package:blog_app/features/auth/presentation/widgets/custom_textfeild.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -39,7 +42,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
               const SizedBox(height: 20),
-              CustomTextfeild(hintText: 'Name', controller: emailController),
+              CustomTextfeild(hintText: 'Name', controller: nameController),
               const SizedBox(height: 20),
               CustomTextfeild(hintText: 'Email', controller: emailController),
               const SizedBox(height: 20),
@@ -49,7 +52,21 @@ class _SignUpPageState extends State<SignUpPage> {
                 controller: passwordController,
               ),
               const SizedBox(height: 20),
-              CustomButton(text: 'Sign up', onPressed: () {}),
+              CustomButton(
+                text: 'Sign up',
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    context.read<AuthBloc>().add(
+                      AuthSignUp(
+                        email: emailController.text,
+                        name: nameController.text,
+                        password: passwordController.text,
+                      ),
+                    );
+                  }
+                  debugPrint('Sign Up Button Pressed');
+                },
+              ),
               const SizedBox(height: 20),
               GestureDetector(
                 onTap: () => Navigator.of(context).push(SignInPage.route()),
