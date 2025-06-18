@@ -1,6 +1,9 @@
 import 'package:blog_app/core/theme/app_theme.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:blog_app/features/auth/presentation/bloc/auth_event.dart';
+
 import 'package:blog_app/features/auth/presentation/pages/sign_in_page.dart';
+
 import 'package:blog_app/init_dependencies.dart';
 
 import 'package:flutter/material.dart';
@@ -18,8 +21,19 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<AuthBloc>().add(UserCurrentLogin());
+  }
 
   // This widget is the root of your application.
   @override

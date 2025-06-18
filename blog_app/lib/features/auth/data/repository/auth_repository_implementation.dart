@@ -47,4 +47,17 @@ class AuthRepositoryImplementation implements AuthRespository {
       throw ServerException('server exception :-  ${e.toString()}');
     }
   }
+
+  @override
+  Future<Either<Failures, UserProfile>> getCurrentUserProfile() async {
+    try {
+      if (authRemoteDataSource.currentSession == null) {
+        return Left(Failures('No current session found'));
+      }
+      final res = await authRemoteDataSource.userData();
+      return Right(res!);
+    } on ServerException catch (e) {
+      return Left(Failures(e.message));
+    }
+  }
 }

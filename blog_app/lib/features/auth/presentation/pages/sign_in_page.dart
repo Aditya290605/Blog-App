@@ -32,6 +32,7 @@ class _SignInPageState extends State<SignInPage> {
                     (context) => HomeScreen(
                       userId: state.user.id,
                       name: state.user.name,
+                      email: state.user.email,
                     ),
               ),
               (route) => false,

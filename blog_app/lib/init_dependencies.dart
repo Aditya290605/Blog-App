@@ -4,7 +4,9 @@ import 'package:blog_app/features/auth/data/repository/auth_repository_implement
 import 'package:blog_app/features/auth/domain/repository/auth_respository.dart';
 import 'package:blog_app/features/auth/domain/usecases/sign_in_usecase.dart';
 import 'package:blog_app/features/auth/domain/usecases/sign_up_usecase.dart';
+import 'package:blog_app/features/auth/domain/usecases/user_auth_state.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
+
 import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -36,10 +38,15 @@ void initAuth() {
     () => SignInUsecase(authRespository: serviceLocator()),
   );
 
+  serviceLocator.registerFactory<UserAuthState>(
+    () => UserAuthState(authRespository: serviceLocator()),
+  );
+
   serviceLocator.registerLazySingleton(
     () => AuthBloc(
       signUpUsecase: serviceLocator(),
       signInUsecase: serviceLocator(),
+      userCurrentLogin: serviceLocator(),
     ),
   );
 }

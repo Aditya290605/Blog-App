@@ -36,6 +36,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     (context) => HomeScreen(
                       userId: state.user.id,
                       name: state.user.name,
+                      email: state.user.email,
                     ),
               ),
               (route) => false,
