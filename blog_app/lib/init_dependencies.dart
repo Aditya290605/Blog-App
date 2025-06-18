@@ -2,6 +2,7 @@ import 'package:blog_app/core/secrets/app_secrets.dart';
 import 'package:blog_app/features/auth/data/data_scources/auth_remote_data_source.dart';
 import 'package:blog_app/features/auth/data/repository/auth_repository_implementation.dart';
 import 'package:blog_app/features/auth/domain/repository/auth_respository.dart';
+import 'package:blog_app/features/auth/domain/usecases/sign_in_usecase.dart';
 import 'package:blog_app/features/auth/domain/usecases/sign_up_usecase.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -31,7 +32,14 @@ void initAuth() {
     () => SignUpUsecase(authRespository: serviceLocator()),
   );
 
+  serviceLocator.registerFactory<SignInUsecase>(
+    () => SignInUsecase(authRespository: serviceLocator()),
+  );
+
   serviceLocator.registerLazySingleton(
-    () => AuthBloc(signUpUsecase: serviceLocator()),
+    () => AuthBloc(
+      signUpUsecase: serviceLocator(),
+      signInUsecase: serviceLocator(),
+    ),
   );
 }

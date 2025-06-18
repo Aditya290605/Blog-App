@@ -1,6 +1,8 @@
 import 'package:blog_app/core/error/exceptions.dart';
 import 'package:blog_app/core/error/failures.dart';
 import 'package:blog_app/features/auth/data/data_scources/auth_remote_data_source.dart';
+
+import 'package:blog_app/features/auth/domain/entities/user_profile.dart';
 import 'package:blog_app/features/auth/domain/repository/auth_respository.dart';
 import 'package:fpdart/fpdart.dart';
 
@@ -9,16 +11,25 @@ class AuthRepositoryImplementation implements AuthRespository {
   AuthRepositoryImplementation({required this.authRemoteDataSource});
 
   @override
-  Future<Either<Failures, String>> signInWithEmailAndPassword({
+  Future<Either<Failures, UserProfile>> signInWithEmailAndPassword({
     required String email,
     required String password,
-  }) {
-    // TODO: implement signInWithEmailAndPassword
-    throw UnimplementedError();
+  }) async {
+    try {
+      final res = await authRemoteDataSource.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return Right(res);
+    } on ServerException catch (e) {
+      return Left(Failures(e.message));
+    } catch (e) {
+      throw ServerException('server exception :-  ${e.toString()}');
+    }
   }
 
   @override
-  Future<Either<Failures, String>> signUpWithEmailAndPassword({
+  Future<Either<Failures, UserProfile>> signUpWithEmailAndPassword({
     required String name,
     required String email,
     required String password,

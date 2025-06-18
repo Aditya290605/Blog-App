@@ -1,3 +1,4 @@
+import 'package:blog_app/features/auth/domain/entities/user_profile.dart';
 import 'package:flutter/material.dart';
 
 @immutable
@@ -8,9 +9,9 @@ final class AuthInitial extends AuthState {}
 final class AuthLoading extends AuthState {}
 
 final class AuthSuccess extends AuthState {
-  final String uid;
+  final UserProfile user;
 
-  AuthSuccess(this.uid);
+  AuthSuccess(this.user);
 }
 
 final class AuthFailure extends AuthState {

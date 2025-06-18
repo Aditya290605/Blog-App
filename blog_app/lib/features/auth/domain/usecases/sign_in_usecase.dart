@@ -1,32 +1,25 @@
 import 'package:blog_app/core/error/failures.dart';
 import 'package:blog_app/core/usecase/use_case_interface.dart';
-
 import 'package:blog_app/features/auth/domain/entities/user_profile.dart';
 import 'package:blog_app/features/auth/domain/repository/auth_respository.dart';
 import 'package:fpdart/fpdart.dart';
 
-class SignUpUsecase implements UseCase<UserProfile, SignUpParams> {
+class SignInUsecase implements UseCase<UserProfile, SignInParams> {
   final AuthRespository authRespository;
-  SignUpUsecase({required this.authRespository});
 
+  SignInUsecase({required this.authRespository});
   @override
-  Future<Either<Failures, UserProfile>> call(SignUpParams params) async {
-    return await authRespository.signUpWithEmailAndPassword(
-      name: params.name,
+  Future<Either<Failures, UserProfile>> call(SignInParams params) async {
+    return await authRespository.signInWithEmailAndPassword(
       email: params.email,
       password: params.password,
     );
   }
 }
 
-class SignUpParams {
-  final String name;
+class SignInParams {
   final String email;
   final String password;
 
-  SignUpParams({
-    required this.name,
-    required this.email,
-    required this.password,
-  });
+  SignInParams({required this.email, required this.password});
 }

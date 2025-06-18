@@ -1,14 +1,15 @@
 import 'package:blog_app/core/error/exceptions.dart';
+import 'package:blog_app/features/auth/data/models/user_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract interface class AuthRemoteDataSource {
-  Future<String> signUpWithEmailAndPassword({
+  Future<UserModel> signUpWithEmailAndPassword({
     required String name,
     required String email,
     required String password,
   });
 
-  Future<String> signInWithEmailAndPassword({
+  Future<UserModel> signInWithEmailAndPassword({
     required String email,
     required String password,
   });
@@ -18,12 +19,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final SupabaseClient supabaseClient;
   AuthRemoteDataSourceImpl({required this.supabaseClient});
   @override
-  Future<String> signUpWithEmailAndPassword({
+  Future<UserModel> signUpWithEmailAndPassword({
     required String name,
     required String email,
     required String password,
   }) async {
-    String res = '';
     try {
       final response = await supabaseClient.auth.signUp(
         email: email,
@@ -34,21 +34,32 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       if (response.user == null) {
         throw ServerException('Failed to sign up user is null');
       }
-      res = response.user!.id;
+      final res = response.user!.toJson();
+      return UserModel.toJson(res);
     } catch (e) {
       throw ServerException('Failed to sign up: ${e.toString()}');
     }
-
-    return res;
   }
 
   @override
-  Future<String> signInWithEmailAndPassword({
+  Future<UserModel> signInWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
-    // Simulate a network call
-    await Future.delayed(const Duration(seconds: 2));
-    return 'User signed in successfully';
+    try {
+      final resonse = await supabaseClient.auth.signInWithPassword(
+        password: password,
+        email: email,
+      );
+
+      if (resonse.user == null) {
+        throw ServerException('Failed to sign in user is null');
+      }
+
+      final res = resonse.user!.toJson();
+      return UserModel.toJson(res);
+    } catch (e) {
+      throw ServerException('Failed to sign in: ${e.toString()}');
+    }
   }
 }
