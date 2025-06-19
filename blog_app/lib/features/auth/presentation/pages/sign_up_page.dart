@@ -31,14 +31,7 @@ class _SignUpPageState extends State<SignUpPage> {
         listener: (context, state) {
           if (state is AuthSuccess) {
             Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                builder:
-                    (context) => HomeScreen(
-                      userId: state.user.id,
-                      name: state.user.name,
-                      email: state.user.email,
-                    ),
-              ),
+              MaterialPageRoute(builder: (context) => HomeScreen()),
               (route) => false,
             );
           }

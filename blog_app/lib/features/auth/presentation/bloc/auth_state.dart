@@ -1,4 +1,4 @@
-import 'package:blog_app/features/auth/domain/entities/user_profile.dart';
+import 'package:blog_app/core/entities/user_profile.dart';
 import 'package:flutter/material.dart';
 
 @immutable

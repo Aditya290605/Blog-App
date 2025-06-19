@@ -2,7 +2,7 @@ import 'package:blog_app/core/error/exceptions.dart';
 import 'package:blog_app/core/error/failures.dart';
 import 'package:blog_app/features/auth/data/data_scources/auth_remote_data_source.dart';
 
-import 'package:blog_app/features/auth/domain/entities/user_profile.dart';
+import 'package:blog_app/core/entities/user_profile.dart';
 import 'package:blog_app/features/auth/domain/repository/auth_respository.dart';
 import 'package:fpdart/fpdart.dart';
 
