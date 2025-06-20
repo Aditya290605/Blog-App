@@ -9,7 +9,17 @@ class AppTheme {
 
       iconTheme: IconThemeData(color: AppPallete.whiteColor),
     ),
+    chipTheme: ChipThemeData(
+      color: WidgetStatePropertyAll(AppPallete.backgroundColor),
+      side: BorderSide.none,
+    ),
+
     inputDecorationTheme: InputDecorationTheme(
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10.0),
+
+        borderSide: BorderSide(color: AppPallete.gradient2, width: 3.0),
+      ),
       contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 25),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10.0),

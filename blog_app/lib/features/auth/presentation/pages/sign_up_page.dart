@@ -3,7 +3,7 @@ import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_event.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_state.dart';
 import 'package:blog_app/features/auth/presentation/pages/sign_in_page.dart';
-import 'package:blog_app/features/auth/presentation/screens/home_screen.dart';
+import 'package:blog_app/features/blog/presentation/pages/home_screen.dart';
 import 'package:blog_app/features/auth/presentation/widgets/custom_button.dart';
 import 'package:blog_app/features/auth/presentation/widgets/custom_textfeild.dart';
 import 'package:flutter/material.dart';
