@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:blog_app/core/theme/app_colors.dart';
+import 'package:blog_app/core/utils/pick_image.dart';
 import 'package:blog_app/features/blog/presentation/widgets/text_editor.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddNewBlogPage extends StatefulWidget {
   const AddNewBlogPage({super.key});
@@ -14,9 +18,20 @@ class AddNewBlogPage extends StatefulWidget {
 class _AddNewBlogPageState extends State<AddNewBlogPage> {
   List<String> selectedItems = [];
 
+  void selectImage() async {
+    final res = await PickImage().pickImage(ImageSource.gallery);
+    setState(() {
+      if (res == null) {
+        return;
+      }
+      file = File(res.path);
+    });
+  }
+
   final TextEditingController blog = TextEditingController();
 
   final TextEditingController blogContent = TextEditingController();
+  File? file;
 
   @override
   Widget build(BuildContext context) {
@@ -27,32 +42,47 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              DottedBorder(
-                options: RoundedRectDottedBorderOptions(
-                  radius: Radius.circular(14),
-                  color: Colors.grey,
-                  dashPattern: [12, 8],
-                ),
-                child: Container(
-                  height: 150,
-                  width: double.infinity,
+              file == null
+                  ? GestureDetector(
+                    onTap: selectImage,
+                    child: DottedBorder(
+                      options: RoundedRectDottedBorderOptions(
+                        radius: Radius.circular(14),
+                        color: Colors.grey,
+                        dashPattern: [12, 8],
+                      ),
+                      child: Container(
+                        height: 150,
+                        width: double.infinity,
 
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.folder_open, size: 40),
-                      const SizedBox(height: 20),
-                      Text(
-                        "Select your image",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.folder_open, size: 40),
+                            const SizedBox(height: 20),
+                            Text(
+                              "Select your image",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
+                    ),
+                  )
+                  : GestureDetector(
+                    onTap: selectImage,
+                    child: SizedBox(
+                      height: 250,
+                      width: double.infinity,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(14),
+                        child: Image.file(file!, fit: BoxFit.cover),
+                      ),
+                    ),
                   ),
-                ),
-              ),
               const SizedBox(height: 40),
 
               SingleChildScrollView(
