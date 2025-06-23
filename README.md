@@ -1,4 +1,4 @@
-# 📝 Flutter Blog App — Clean Architecture Full Stack Project
+# 📝 Flutter Blog App With clean architecture and SOLID principles 
 
 ![Made with Flutter](https://img.shields.io/badge/Flutter-Framework-blue.svg)
 ![State Management: Bloc/Cubit](https://img.shields.io/badge/State--Management-Bloc%20%26%20Cubit-yellow)
