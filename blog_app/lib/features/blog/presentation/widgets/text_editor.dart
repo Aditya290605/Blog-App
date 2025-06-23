@@ -15,6 +15,12 @@ class TextEditor extends StatelessWidget {
       controller: controller,
       decoration: InputDecoration(hintText: hintTex),
       maxLines: null,
+      validator: (value) {
+        if (controller.text.isEmpty) {
+          return '$hintTex is missing';
+        }
+        return null;
+      },
     );
   }
 }

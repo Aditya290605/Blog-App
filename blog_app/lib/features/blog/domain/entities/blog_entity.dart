@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class BlogEntity {
   String title;
   String content;
@@ -6,6 +7,7 @@ class BlogEntity {
   String uid;
   List<String> topics;
   DateTime updatedAt;
+  String? posterName;
 
   BlogEntity({
     required this.title,
@@ -15,5 +17,6 @@ class BlogEntity {
     required this.uid,
     required this.topics,
     required this.updatedAt,
+    this.posterName,
   });
 }

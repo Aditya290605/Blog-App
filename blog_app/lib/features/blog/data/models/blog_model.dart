@@ -9,6 +9,7 @@ class BlogModel extends BlogEntity {
     required super.uid,
     required super.topics,
     required super.updatedAt,
+    super.posterName,
   });
 
   Map<String, dynamic> toJson() {
@@ -17,24 +18,46 @@ class BlogModel extends BlogEntity {
       'content': content,
       'imageurl': imgUrl,
       'userid': userid,
-      'uid': uid,
-      'topics': topics,
+      'id': uid,
+      'topic': topics,
       'updated_at': updatedAt.toIso8601String(),
     };
   }
 
   factory BlogModel.fromJson(Map<String, dynamic> map) {
     return BlogModel(
-      title: map['title'] as String,
-      content: map['content'] as String,
-      imgUrl: map['imagurl'] as String,
-      userid: map['userid'] as String,
-      uid: map['uid'] as String,
-      topics: List<String>.from((map['topics'] as List<String>)),
+      title: map['title'],
+      content: map['content'],
+      imgUrl: map['imageurl'],
+      userid: map['userid'],
+      uid: map['id'],
+      topics: List<String>.from((map['topic'])),
       updatedAt:
           map['updated_at'] == null
               ? DateTime.now()
               : DateTime.parse(map['updated_at']),
+    );
+  }
+
+  BlogModel copyWith({
+    String? title,
+    String? content,
+    String? imgUrl,
+    String? userid,
+    String? uid,
+    List<String>? topics,
+    DateTime? updatedAt,
+    String? posterName,
+  }) {
+    return BlogModel(
+      title: title ?? this.title,
+      content: content ?? this.content,
+      imgUrl: imgUrl ?? this.imgUrl,
+      userid: userid ?? this.userid,
+      uid: uid ?? this.uid,
+      topics: topics ?? this.topics,
+      updatedAt: updatedAt ?? this.updatedAt,
+      posterName: posterName ?? this.posterName,
     );
   }
 }
