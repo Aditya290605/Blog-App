@@ -18,22 +18,22 @@ This is a **Full Stack Blog App** built using **Flutter** and structured using t
 <table style="width: 100%;">
   <tr>
     <td align="center" width="25%">
-      <img src="./assets/start_screen.png" width="120"/><br>
+      <img src="https://i.postimg.cc/BbdKLmML/Screenshot-1750783957.png" width="120"/><br>
       <b>Signup scree</b><br>
       Allow users login or signup
     </td>
     <td align="center" width="25%">
-      <img src="./assets/sign_up.png" width="120"/><br>
+      <img src="https://i.postimg.cc/nMbNRt3H/Screenshot-1750784363.png" width="120"/><br>
       <b>Blog Screen</b><br>
       Displays blogs here
     </td>
      <td align="center" width="25%">
-      <img src="./assets/login.png" width="120"/><br>
+      <img src="https://i.postimg.cc/Gpy7ffst/Screenshot-1750784366.png" width="120"/><br>
       <b>Add blogs</b><br>
       allows users to create and upload blogs
     </td>
     <td align="center" width="25%">
-      <img src="./assets/home_page.png" width="120"/><br>
+      <img src="https://i.postimg.cc/5yLstKVy/Screenshot-1750784377.png" width="120"/><br>
       <b>Blog details</b><br>
        Display detials of blog
     </td>
