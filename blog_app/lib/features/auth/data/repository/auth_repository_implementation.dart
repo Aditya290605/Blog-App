@@ -1,5 +1,7 @@
 import 'package:blog_app/core/error/exceptions.dart';
 import 'package:blog_app/core/error/failures.dart';
+import 'package:blog_app/core/network/check_internet_connection.dart';
+
 import 'package:blog_app/features/auth/data/data_scources/auth_remote_data_source.dart';
 
 import 'package:blog_app/core/entities/user_profile.dart';
@@ -8,7 +10,11 @@ import 'package:fpdart/fpdart.dart';
 
 class AuthRepositoryImplementation implements AuthRespository {
   final AuthRemoteDataSource authRemoteDataSource;
-  AuthRepositoryImplementation({required this.authRemoteDataSource});
+  final CheckInternetConnection checkInternetConnection;
+  AuthRepositoryImplementation({
+    required this.authRemoteDataSource,
+    required this.checkInternetConnection,
+  });
 
   @override
   Future<Either<Failures, UserProfile>> signInWithEmailAndPassword({
@@ -16,6 +22,8 @@ class AuthRepositoryImplementation implements AuthRespository {
     required String password,
   }) async {
     try {
+      if (!await checkInternetConnection.isConnected) {}
+
       final res = await authRemoteDataSource.signInWithEmailAndPassword(
         email: email,
         password: password,
@@ -51,6 +59,22 @@ class AuthRepositoryImplementation implements AuthRespository {
   @override
   Future<Either<Failures, UserProfile>> getCurrentUserProfile() async {
     try {
+      if (!await checkInternetConnection.isConnected) {
+        final session = authRemoteDataSource.currentSession;
+
+        if (authRemoteDataSource.currentSession == null) {
+          return Left(Failures('No current session found'));
+        }
+
+        return Right(
+          UserProfile(
+            id: session!.user.id,
+            name: '',
+            email: session.user.email ?? '',
+          ),
+        );
+      }
+
       if (authRemoteDataSource.currentSession == null) {
         return Left(Failures('No current session found'));
       }
