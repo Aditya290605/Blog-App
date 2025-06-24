@@ -48,11 +48,9 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkThemeMode,
       home: BlocSelector<AppUserCubit, AppUserState, bool>(
-        selector: (state) {
-          return state is AppUserLogedIn;
-        },
-        builder: (context, state) {
-          if (!state is AppUserLogedIn) {
+        selector: (state) => state is AppUserLogedIn,
+        builder: (context, isLoggedIn) {
+          if (!isLoggedIn) {
             return SignInPage();
           }
           return HomeScreen();

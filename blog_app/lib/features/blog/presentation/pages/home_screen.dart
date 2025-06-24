@@ -2,6 +2,8 @@ import 'package:blog_app/core/theme/app_colors.dart';
 import 'package:blog_app/features/blog/domain/entities/blog_entity.dart';
 import 'package:blog_app/features/blog/presentation/bloc/blog_bloc.dart';
 import 'package:blog_app/features/blog/presentation/pages/add_new_blog_page.dart';
+import 'package:blog_app/features/blog/presentation/pages/blog_viewer_page.dart';
+import 'package:blog_app/features/blog/presentation/widgets/blog_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () {
           Navigator.push(context, AddNewBlogPage().route());
         },
-        backgroundColor: AppPallete.gradient1,
+        backgroundColor: Colors.orangeAccent,
         child: Icon(Icons.add),
       ),
       body: BlocConsumer<BlogBloc, BlogState>(
@@ -56,7 +58,20 @@ class _HomeScreenState extends State<HomeScreen> {
           return ListView.builder(
             itemCount: blogs.length,
             itemBuilder: (context, index) {
-              return Text(blogs[index].title);
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(context, BlogViewerPage.route(blogs[index]));
+                },
+                child: BlogCard(
+                  blog: blogs[index],
+                  color:
+                      index % 3 == 0
+                          ? AppPallete.gradient1
+                          : index % 3 == 1
+                          ? AppPallete.gradient2
+                          : AppPallete.gradient3,
+                ),
+              );
             },
           );
         },
