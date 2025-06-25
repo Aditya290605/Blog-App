@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:blog_app/core/common/cubits/app_users/app_user_cubit.dart';
+import 'package:blog_app/core/constants/constants.dart';
 import 'package:blog_app/core/theme/app_colors.dart';
 import 'package:blog_app/core/utils/pick_image.dart';
 
@@ -147,12 +148,7 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children:
-                            {
-                                  'Busniess',
-                                  'Technology',
-                                  'Programming',
-                                  'Entertainment',
-                                }
+                            topics
                                 .map(
                                   (e) => Padding(
                                     padding: const EdgeInsets.symmetric(
